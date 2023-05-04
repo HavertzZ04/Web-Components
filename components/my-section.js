@@ -9,10 +9,39 @@ export default class mySection extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
+    }
+
+    handleEvent(e){
+        (e.type === "click") ? this.enviar(e)
+        :undefined
+    }
+
+    enviar(e){
+        console.log(e);
+        e.preventDefault()
+        alert(`
+        ░░░░░░░░░░░▄▄
+        ░░░░░░░░░░█░░█
+        ░░░░░░░░░░█░░█
+        ░░░░░░░░░█░░░█
+        ░░░░░░░░█░░░░█
+        ██████▄▄█░░░░░██████▄
+        ▓▓▓▓▓█░░░░░░░░░░░░░░█
+        ▓▓▓▓▓█░░░░░░░░░░░░░░█
+        ▓▓▓▓▓█░░░░░░░░░░░░░░█
+        ▓▓▓▓▓█░░░░░░░░░░░░░░█
+        ▓▓▓▓▓█░░░░░░░░░░░░░░█
+        ▓▓▓▓▓█████░░░░░░░░░█
+        █████▀░░░░▀▀██████▀
+        `)
+    }
+
+    connectedCallback(){
         Promise.resolve(mySection.components()).then(html => {
             this.shadowRoot.innerHTML = html;
+            this.MySection = this.shadowRoot.querySelector(".hed");
+            this.MySection.addEventListener("click", this.handleEvent.bind(this))
         })
-        console.log("mySection funcionando")
     }
 }
 
